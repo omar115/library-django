@@ -14,6 +14,10 @@ def index(request):
     # Available books (status = 'a')
     num_instances_available = BookInstance.objects.filter(status__exact='a').count()
 
+    #number of visits count using sessions
+    num_visits = request.session.get('num-visits', 1)
+    request.session['num-visits'] = num_visits + 1
+
     # The 'all()' is implied by default.
     num_authors = Author.objects.count()
 
